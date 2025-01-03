@@ -1,0 +1,15 @@
+.content-container {
+    margin-left: 250px; /* Matches sidebar width */
+    
+  }
+  
+  @media (max-width: 767px) {
+    .sidebar {
+      position: relative;
+      transition: width 0.3s;
+    }
+    .content-container {
+      margin-left: 0;
+    }
+  }
+  
