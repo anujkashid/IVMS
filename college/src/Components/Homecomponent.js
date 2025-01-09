@@ -186,19 +186,19 @@ const Homecomponent = () => {
           className=" d-flex flex-column justify-content-center"
           style={{ height: "100vh" }}
         >
-          <h3 className="text-center text-white  fssize content-section1">Welcome</h3>
+          <h3 className="text-center text-white  fssize content-section1" style={{marginTop:"30px"}}>Welcome</h3>
           <h3
             className="text-center text-info content-section1 "
-            style={{ fontSize: "40px",marginTop:"80px"}}
+            style={{ fontSize: "40px"}}
           >
             {collegename}
           </h3>
 
-          <div className=" text-center text-white content-section1">
-            <p className="fs-4">Bridging the gap between classroom concepts and industry practices</p>
+          <div className=" text-center text-white content-section1 " style={{marginTop:"80px"}}>
+            <p className="fs-2" style={{font:"italic  24px/1 cursive"}}>Bridging the gap between classroom concepts and industry practices</p>
           </div>
 
-          <div className="text-center">
+          <div className="text-center mt-2">
             <Link to="/addvisit" className="text-decoration-none">
               <Button className="px-3 py-1 btn btn-info rounded-4 fs-5 text-dark">
                 Book Visit
@@ -207,7 +207,7 @@ const Homecomponent = () => {
           </div>
 
           <div className="marquee-container">
-            <div className="marquee content-section1 text-info" style={{marginTop:"80px",fontSize:"20px"}}>
+            <div className="marquee content-section1 text-info" style={{marginTop:"150px",fontSize:"20px"}}>
               Your Last Visit with Sumago Infotech Private Limited was on &nbsp;
               {lastDate && !isNaN(new Date(lastDate).getTime())
                 ? `${formatDate1(lastDate)} 🌟`

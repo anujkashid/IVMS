@@ -277,3 +277,51 @@
     color:white !important;
     border: none !important;
   }
+
+  .home-section1 {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    z-index: -1;
+}
+
+.home-section1::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
+    url("./Images/loginsum.jpg") center center no-repeat;
+    background-size: cover;
+    /* opacity: 0.8; */
+    /* filter: blur(2px); */
+    z-index: -1;
+}
+
+.back-color1{
+  background:linear-gradient(to bottom right, #30a8e2,#2a1167);
+  min-height: 100vh;
+}
+
+.text-container {
+  padding-top: 9vh;
+  text-align: center; /* Optional: Align text to the center */
+}
+
+/* Text styles */
+.text-container p {
+  color: white;
+  font-size: 1.5rem; /* Adjust font size */
+  margin-top: 1rem; /* Add top margin */
+  font-weight: bold; /* Make text bold */
+  transition: all 0.3s ease; /* Smooth transition for all properties */
+}
+
+/* Hover effect */
+.text-container p:hover {
+  color: #ffcc00; /* Change text color to yellow on hover */
+  transform: scale(1.1); /* Slightly increase size on hover */
+}
+

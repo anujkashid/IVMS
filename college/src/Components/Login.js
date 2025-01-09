@@ -4,6 +4,8 @@ import { Card, Col, Container, Form, Row, Button, Alert, Navbar, Nav, Dropdown }
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../Images/sumago-logo.png";
+import "../App.css";
+
 const Login = () => {
   const navigate = useNavigate();
   const [reg_college_username,SetCollegeName] = useState("");
@@ -11,7 +13,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [serverError, setServerError] = useState("");
   const [visitData, setVisitData] = useState();
-  const [TotalVisita,setTotalVisita] = useState();
+  const [TotalVisita,setTotalVisita] = useState(100);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,19 +52,16 @@ const Login = () => {
         setVisitData(data);
         // total visit count
         const totalcount = data.length;
-        setTotalVisita(totalcount);
+        setTotalVisita(100+totalcount);
   }) 
           .catch((err) => console.log(err));
       },[]);
 
   return (
-    <div  style={{
-      background: "linear-gradient(135deg,rgb(133, 202, 230),rgb(45, 128, 154),rgb(125, 205, 232))",
-      height: "100vh",           
-      width: "100vw",                 
-    }}>
-    <Navbar collapseOnSelect expand="lg" fixed="top"  variant="dark">
-    {/* Brand */}
+    <div >
+  
+    {/* <Navbar collapseOnSelect expand="lg" fixed="top"  variant="dark">
+  
     <Navbar.Brand className="fs-5 ms-4 d-flex align-items-center">
       <img
         src={logo}
@@ -83,14 +82,14 @@ const Login = () => {
 
     <Navbar.Collapse id="responsive-navbar-nav">
       <Nav className="ms-auto d-flex align-items-center">
-        {/* Profile */}
+   
         <Nav.Link href="/register">
         <Button className="me-3">
         REGISTER
         </Button>
         </Nav.Link>
 
-        {/* Login */}
+       
         <Nav.Link href="/">
         <Button className="me-5">
         LOGIN
@@ -98,23 +97,45 @@ const Login = () => {
         </Nav.Link>
       </Nav>
     </Navbar.Collapse>
-  </Navbar>
-    <Container>
-      <Row className="" style={{paddingTop:"20vh"}}>
-        <Col md={6} className="text-center">
-        <div className="fs-2 fw-bold mt-4" style={{color:"rgb(234, 234, 234)"}}>
-               WELCOME TO <br></br>SUMAGO INFOTECH 
+  </Navbar> */}
+    <Container fluid >
+      <Row className="" >
+        <Col md={7} className="text-center home-section1" >
+       
+        <div className="fs-1 fw-bold mt-4 text-white"  style={{paddingTop:"10vh"}}>
+               WELCOME TO SUMAGO INFOTECH
         </div>
-        <Card className=" shadow shadow-md mx-auto bg-secondary rounded-4" style={{width:"12rem", height:"12rem", marginTop:"15vh", background:"linear-gradient(-135deg,rgb(241, 173, 240),rgb(186, 116, 197),rgb(133, 55, 142))"}}>
+        
+        <div className="text-container">
+  <p className="">INDUSTRIAL VISIT MANAGEMENT SYSTEM</p>
+</div>
+        
+        <div className="mt-3 text-center mx-5">
+          <p className="text-white fs-5 " style={{justifyContent:"justify"}}>A single platform for managing all stakeholder collaboration which aims to bridge the gap between academia and industry, gain valuable insights and build strong industrial relationships.</p>
+        </div>
+        {/* <Card  className=" shadow shadow-md mx-auto bg-secondary rounded-4"
+              style={{
+                width: "12rem",
+                height: "12rem",
+                marginTop: "15vh",
+                background: "linear-gradient(#b0e0e6, #4682b4)",
+              }}
+         >
         <Card.Title className="p-2 fs-1 fw-bold text-primary">
         {TotalVisita}+
         </Card.Title>
         <Card.Text className="text-dark fs-3 fw-bold mt-3">
             Total Visits
       </Card.Text>
-          </Card>
+</Card> */}
+
+
+<div className="text-white" style={{ marginTop: "15vh"}}>
+  <h2 className="fs-1" >{TotalVisita}+ <span className="fs-5">Completed Visits Until Now </span></h2>
+</div>
         </Col>
-          <Col md={6} className="d-flex justify-content-end mt-3">
+          <Col md={5} className="d-flex justify-content-center align-items-center back-color1">
+           
           <Card className="border border-primary shadow shadow-md " style={{height:"28rem", width:"25rem"}}>
             <Card.Body>
               <h3 className="text-center text-primary fs-2">Login</h3>
@@ -148,9 +169,9 @@ const Login = () => {
                     className="ms-2"
                   >
                     {showPassword ? (
-                      <><FaEyeSlash size={24} className="me-1 text-dark" /></>
+                      <><FaEyeSlash size={24} className="me-1 text-primary" /></>
                     ) : (
-                      <><FaEye size={24} className="me-1 text-dark" /></>
+                      <><FaEye size={24} className="me-1 text-primary" /></>
                     )}
                   </Button>
 

@@ -266,11 +266,13 @@ const College_registration = () => {
 
   return (
     <>
-     <div  style={{
-      background: "linear-gradient(135deg,rgb(133, 202, 230),rgb(45, 128, 154),rgb(125, 205, 232))",
-      height: "100%",           
-      // width: "100vw"                
-    }}>
+    <div
+        style={{
+          backgroundColor: "#add8e6",
+          height: "100%",
+          // width: "100vw"
+        }}
+      >
 
     <Navbar collapseOnSelect expand="lg"   variant="dark">
     {/* Brand */}
