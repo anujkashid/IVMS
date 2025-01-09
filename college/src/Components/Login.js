@@ -5,6 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../Images/sumago-logo.png";
 import "../App.css";
+import Typewriter from "typewriter-effect";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -131,7 +132,18 @@ const Login = () => {
 
 
 <div className="text-white" style={{ marginTop: "15vh"}}>
-  <h2 className="fs-1" >{TotalVisita}+ <span className="fs-5">Completed Visits Until Now </span></h2>
+<Typewriter
+  onInit={(typewriter) => {
+    typewriter
+      .typeString(
+        `<span class="fs-1"><span class="fw-bold">${TotalVisita}</span>+ <span class="fs-5">Completed Visits Until Now</span></span>`
+      )
+      .pauseFor(1000)
+      .deleteAll()
+      .typeString( `<span class="fs-1"><span class="fw-bold">${TotalVisita}</span>+ <span class="fs-5">Completed Visits Until Now</span></span>`)
+      .start();
+  }}
+/>
 </div>
         </Col>
           <Col md={5} className="d-flex justify-content-center align-items-center back-color1">

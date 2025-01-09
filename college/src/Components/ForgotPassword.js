@@ -11,7 +11,8 @@ const ForgetPasswordComponent = () => {
   const [emailExists, setEmailExists] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+
   // Fetch the list of emails from the database
   useEffect(() => {
     axios
@@ -23,11 +24,24 @@ const ForgetPasswordComponent = () => {
   }, []);
 
   // Check if the entered email exists in the database
-  const checkEmail = () => {
+  const checkEmail = async () => {
     const user = data.find((user) => user.reg_college_email_id === reg_college_email_id);
     if (user) {
-      setEmailExists(true);
-      setErrorMessage('');
+      try {
+        // Send verification email
+        await axios.post('http://localhost:8000/updateemail', {
+          email: reg_college_email_id,
+          link: `http://localhost:3000/forget?email=${encodeURIComponent(
+            reg_college_email_id
+          )}`,
+        });
+        setEmailExists(true);
+        setErrorMessage('');
+        setSuccessMessage('Verification email sent. Please check your inbox.');
+      } catch (err) {
+        console.error(err);
+        setErrorMessage('Failed to send verification email.');
+      }
     } else {
       setEmailExists(false);
       setErrorMessage('Email not available. Please register.');
@@ -42,7 +56,9 @@ const ForgetPasswordComponent = () => {
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     if (!passwordRegex.test(reg_password)) {
-      setErrorMessage('Password must contain at least one uppercase letter, one digit, and one special character.');
+      setErrorMessage(
+        'Password must contain at least one uppercase letter, one digit, and one special character.'
+      );
       return;
     }
 
@@ -52,12 +68,12 @@ const ForgetPasswordComponent = () => {
     }
 
     try {
-      const response = await axios.put(`http://localhost:8000/forget`, {
+      await axios.put(`http://localhost:8000/forget`, {
         reg_college_email_id,
         reg_password,
       });
 
-      navigate("/");
+      navigate('/');
       setSuccessMessage('Password updated successfully.');
       setErrorMessage('');
       setEmail('');
@@ -71,12 +87,15 @@ const ForgetPasswordComponent = () => {
   };
 
   return (
-    <div className="d-flex align-items-center justify-content-center vh-100" style={{ background: "linear-gradient(135deg, #145a76, #1d809f, #67b7d1)" }}>
+    <div
+      className="d-flex align-items-center justify-content-center vh-100"
+      style={{ background: 'linear-gradient(135deg, #145a76, #1d809f, #67b7d1)' }}
+    >
       <Container>
         <Row>
           <Col md={4} className="mx-auto bg-white border border-dark p-3 shadow shadow-md">
             <h3 className="text-center text-primary fs-3">Forgot Password</h3>
-            <Form >
+            <Form>
               {!emailExists ? (
                 <>
                   {/* Email Field */}
@@ -89,13 +108,13 @@ const ForgetPasswordComponent = () => {
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </Form.Group>
-                  <div className='text-center mt-3'>
-                  <Button className="btn btn-primary mt-3" onClick={checkEmail}>
-                    Verify Email
-                  </Button>
-                  <Link to="/" className="text-decoration-none">
-                    <Button className="btn btn-danger mt-3 ms-5">Cancel</Button>
-                  </Link>
+                  <div className="text-center mt-3">
+                    <Button className="btn btn-primary mt-3" onClick={checkEmail}>
+                      Verify Email
+                    </Button>
+                    <Link to="/" className="text-decoration-none">
+                      <Button className="btn btn-danger mt-3 ms-5">Cancel</Button>
+                    </Link>
                   </div>
                 </>
               ) : (
@@ -110,20 +129,20 @@ const ForgetPasswordComponent = () => {
                     />
                   </Form.Group>
                   <Form.Group>
-                    <Form.Label className='mt-2'>Confirm new password:</Form.Label>
+                    <Form.Label className="mt-2">Confirm new password:</Form.Label>
                     <Form.Control
                       type="password"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                   </Form.Group>
-                  <div className='d-flex justify-content-center'>
-                  <Button className="btn btn-primary mt-3" onClick={updatePassword}>
-                    Reset Password
-                  </Button>
-                  <Link to="/" className="text-decoration-none">
-                    <Button className="btn btn-danger mt-3 ms-5">Cancel</Button>
-                  </Link>
+                  <div className="d-flex justify-content-center">
+                    <Button className="btn btn-primary mt-3" onClick={updatePassword}>
+                      Reset Password
+                    </Button>
+                    <Link to="/" className="text-decoration-none">
+                      <Button className="btn btn-danger mt-3 ms-5">Cancel</Button>
+                    </Link>
                   </div>
                 </>
               )}
